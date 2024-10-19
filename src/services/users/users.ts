@@ -1,5 +1,5 @@
-import { User } from '../models/User';
-import { firestore } from '../database/database';
+import { User } from '../../models/User';
+import { firestore } from '../../database/database';
 
 export const createUser = async (userData: User): Promise<User> => {
   const userRef = firestore.collection('users').doc();

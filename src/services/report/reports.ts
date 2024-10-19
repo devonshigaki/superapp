@@ -1,5 +1,5 @@
-import { Report } from '../models/Report';
-import { firestore } from '../database/database';
+import { Report } from '../../models/Report';
+import { firestore } from '../../database/database';
 
 export const createReportData = async (reportData: Report): Promise<Report> => {
   const reportRef = firestore.collection('reports').doc();

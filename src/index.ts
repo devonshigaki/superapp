@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import { createUser, fetchUserData, updateUserData } from './services/users';
-import { createReportData, fetchReportDataFirestore, updateReportDataFirestore } from './services/reports';
+import { createUser, fetchUserData, updateUserData } from './services/users/users';
+import { createReportData, fetchReportDataFirestore, updateReportDataFirestore } from './services/report/reports';
 import { createProvider } from './services/providers';
 import { createOffer, fetchPersonalizedOffers } from './services/offers';
 
