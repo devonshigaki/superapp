@@ -1,0 +1,73 @@
+{
+  "name": "FreshCredit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc && wasm-pack build src/rust/freshcredit-wasm",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "type-check": "tsc --noEmit",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "web": "react-native start --reset-cache",
+    "docker:build": "docker build -t freshcredit .",
+    "docker:run": "docker run -p 3000:3000 freshcredit"
+  },
+  "dependencies": {
+    "@google-cloud/functions": "^3.6.0",
+    "@google-cloud/pubsub": "^4.8.0",
+    "@polkadot/api": "^9.1.1",
+    "@polkadot/keyring": "^9.1.1",
+    "@polkadot/util": "^9.1.1",
+    "@polkadot/util-crypto": "^9.1.1",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "@stripe/stripe-js": "^1.54.2",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "ethers": "^6.5.0",
+    "express": "^4.21.1",
+    "firebase-admin": "^12.6.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.2.0",
+    "react-native": "^0.75.4",
+    "react-native-dotenv": "^3.4.11",
+    "react-native-paper": "^5.12.5",
+    "react-native-safe-area-context": "^4.11.1",
+    "react-native-screens": "^3.34.0",
+    "react-test-renderer": "^18.3.1",
+    "styled-components": "^6.1.13",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3",
+    "wasm-pack": "^0.0.0"
+  },
+  "resolutions": {
+    "metro-react-native-babel-preset": "^0.73.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "@types/jest"
+    },
+    "testMatch": [
+      "**/tests/**/*.+(ts|tsx|js|jsx)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js|jsx)"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "coverageDirectory": "coverage"
+  }
+}

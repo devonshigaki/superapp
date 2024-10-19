@@ -1,0 +1,56 @@
+Version: '3.7'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - ./config:/app/config
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://localhost:27017/freshcredit
+      - FIREBASE_CONFIG=./config/serviceAccountKey.json
+      - GOOGLE_APPLICATION_CREDENTIALS=./config/google-cloud-key.json
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=freshcredit
+    depends_on:
+      - database
+      - redis
+      - mysql
+      - polkadot
+
+  database:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./database/data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./database/redis:/data
+  mysql:
+    image: mysql:latest
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=freshcredit
+    volumes:
+      - ./database/mysql:/var/lib/mysql
+  polkadot:
+    image: substrateio/polkadot:latest
+    ports:
+      - '9944:9944'
+      - '9933:9933'
+    volumes:
+      - ./database/polkadot:/data
+    command: ["--dev", "--ws-port=9944", "--rpc-port=9933"]
